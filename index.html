@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devika Jewellery Designers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --orange: #E8651A;
+      --orange-light: #F4874B;
+      --orange-dark: #C04E0A;
+      --gold: #C9992A;
+      --gold-light: #E8BF5A;
+      --bg: #FAF8F5;
+      --bg2: #F2EDE6;
+      --bg3: #EAE2D6;
+      --surface: #FFFFFF;
+      --text: #1A1208;
+      --text2: #5A4A38;
+      --text3: #9A8878;
+      --border: rgba(200,160,100,0.18);
+      --nav-bg: rgba(250,248,245,0.88);
+      --shadow: 0 8px 48px rgba(80,40,10,0.10);
+      --shadow-sm: 0 2px 16px rgba(80,40,10,0.07);
+    }
+    [data-theme="dark"] {
+      --bg: #100C06;
+      --bg2: #1A1208;
+      --bg3: #241A0E;
+      --surface: #1E1610;
+      --text: #F5EFE6;
+      --text2: #C8B49A;
+      --text3: #7A6858;
+      --border: rgba(200,160,100,0.12);
+      --nav-bg: rgba(16,12,6,0.92);
+      --shadow: 0 8px 48px rgba(0,0,0,0.4);
+      --shadow-sm: 0 2px 16px rgba(0,0,0,0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s, color 0.4s;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 4px; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      backdrop-filter: blur(18px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5vw;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links {
+      display: flex; align-items: center; gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 400; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text2); text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+    .theme-toggle {
+      background: none; border: 1px solid var(--border);
+      border-radius: 50px; cursor: pointer;
+      width: 44px; height: 24px;
+      position: relative; transition: border-color 0.3s;
+      padding: 0;
+    }
+    .theme-toggle::after {
+      content: '';
+      position: absolute; top: 3px; left: 3px;
+      width: 16px; height: 16px;
+      background: var(--orange);
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    [data-theme="dark"] .theme-toggle::after { transform: translateX(20px); }
+    .nav-cta {
+      background: var(--orange); color: #fff;
+      border: none; border-radius: 3px;
+      padding: 0.45rem 1.2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.25s, transform 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px 8vw 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 50%, rgba(232,101,26,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,153,42,0.06) 0%, transparent 70%);
+    }
+    .hero-ornament {
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: min(55vw, 700px); height: min(55vw, 700px);
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      z-index: 0; pointer-events: none;
+    }
+    .hero-ornament::before {
+      content: ''; position: absolute; inset: 30px;
+      border-radius: 50%; border: 1px solid var(--border);
+    }
+    .hero-ornament::after {
+      content: ''; position: absolute; inset: 60px;
+      border-radius: 50%; border: 1px solid rgba(232,101,26,0.2);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 1.8rem;
+    }
+    .hero-tag::before {
+      content: ''; display: block;
+      width: 28px; height: 1px; background: var(--orange);
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 300; line-height: 1.06;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em { font-style: italic; color: var(--orange); }
+    .hero-sub {
+      font-size: 1rem; font-weight: 300; line-height: 1.75;
+      color: var(--text2); max-width: 420px; margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      padding: 0.85rem 2rem; border-radius: 3px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 20px rgba(232,101,26,0.3);
+    }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,101,26,0.35); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      padding: 0.85rem 2rem; border-radius: 3px;
+      border: 1px solid var(--border);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem; font-weight: 400; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      transition: border-color 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 3.5rem;
+      padding-top: 2.5rem; border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 400; color: var(--orange);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.7rem; font-weight: 400; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text3); margin-top: 0.35rem;
+    }
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-jewel-display {
+      width: min(420px, 45vw);
+      aspect-ratio: 3/4;
+      background: var(--surface);
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+      overflow: hidden; position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .jewel-svg { width: 70%; opacity: 0.92; }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 100px 8vw; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 1.2rem;
+    }
+    .section-tag::before {
+      content: ''; display: block; width: 24px; height: 1px; background: var(--orange);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.12; color: var(--text);
+    }
+    .section-title em { font-style: italic; color: var(--orange); }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--orange);
+      padding: 14px 0; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 0;
+      animation: marquee 22s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.85);
+      padding: 0 2.5rem; white-space: nowrap;
+    }
+    .marquee-dot { color: rgba(255,255,255,0.4); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6vw; align-items: center;
+      background: var(--bg2);
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-frame {
+      aspect-ratio: 4/5;
+      background: var(--bg3);
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow);
+    }
+    .about-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--orange); color: #fff;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      box-shadow: 0 8px 24px rgba(232,101,26,0.35);
+    }
+    .about-badge-num { font-size: 2rem; font-weight: 400; line-height: 1; }
+    .about-badge-txt { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9; }
+    .about-content { padding: 1rem 0; }
+    .about-text {
+      font-size: 1rem; font-weight: 300; line-height: 1.85;
+      color: var(--text2); margin: 1.8rem 0 2.5rem;
+    }
+    .about-text strong { color: var(--text); font-weight: 500; }
+    .about-features {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .about-feature {
+      padding: 1.2rem; border: 1px solid var(--border);
+      border-radius: 3px; background: var(--surface);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .about-feature:hover { border-color: var(--orange); transform: translateY(-3px); }
+    .about-feature-icon {
+      font-size: 1.4rem; margin-bottom: 0.6rem;
+    }
+    .about-feature-title {
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text); margin-bottom: 0.3rem;
+    }
+    .about-feature-text {
+      font-size: 0.8rem; font-weight: 300; color: var(--text3); line-height: 1.5;
+    }
+
+    /* ── COLLECTIONS ── */
+    #collections { background: var(--bg); }
+    .collections-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .collections-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .collection-card {
+      background: var(--surface);
+      overflow: hidden; position: relative;
+      cursor: pointer;
+    }
+    .collection-card:first-child {
+      grid-row: span 2;
+    }
+    .collection-img {
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg3);
+      overflow: hidden; position: relative;
+      transition: transform 0.6s ease;
+    }
+    .collection-card:first-child .collection-img {
+      aspect-ratio: auto; height: 100%;
+      min-height: 400px;
+    }
+    .collection-card:hover .collection-img { transform: scale(1.04); }
+    .collection-info {
+      padding: 1.4rem 1.6rem;
+      border-top: 1px solid var(--border);
+    }
+    .collection-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 400; color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .collection-sub {
+      font-size: 0.75rem; font-weight: 300; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text3);
+    }
+    .collection-tag-pill {
+      display: inline-block; margin-top: 0.7rem;
+      padding: 0.25rem 0.75rem;
+      background: rgba(232,101,26,0.1); color: var(--orange);
+      border-radius: 50px;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em;
+    }
+
+    /* ── PROCESS ── */
+    #process { background: var(--bg2); }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2rem; margin-top: 3.5rem;
+    }
+    .process-step {
+      position: relative; padding-top: 1rem;
+    }
+    .process-step::before {
+      content: ''; position: absolute; top: 28px; left: 48px; right: -2rem;
+      height: 1px; background: var(--border); z-index: 0;
+    }
+    .process-step:last-child::before { display: none; }
+    .process-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem; font-weight: 400;
+      color: var(--orange); letter-spacing: 0.1em;
+      margin-bottom: 1.4rem; position: relative; z-index: 1;
+      display: inline-block;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(232,101,26,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .process-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 400; color: var(--text);
+      margin-bottom: 0.7rem;
+    }
+    .process-text {
+      font-size: 0.85rem; font-weight: 300; line-height: 1.7; color: var(--text3);
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--bg); }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3.5rem;
+    }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .testimonial-card:hover {
+      border-color: var(--orange); transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .testimonial-stars { color: var(--orange); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1.2rem; }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 300; font-style: italic;
+      line-height: 1.65; color: var(--text2); margin-bottom: 1.6rem;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; color: var(--orange);
+    }
+    .testimonial-name { font-size: 0.82rem; font-weight: 500; color: var(--text); }
+    .testimonial-loc { font-size: 0.72rem; font-weight: 300; color: var(--text3); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg3);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6vw; align-items: center;
+    }
+    .contact-info { }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.4rem 0; border-bottom: 1px solid var(--border);
+    }
+    .contact-detail:last-of-type { border-bottom: none; }
+    .contact-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+      color: var(--orange);
+    }
+    .contact-label {
+      font-size: 0.68rem; font-weight: 400; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text3); margin-bottom: 0.25rem;
+    }
+    .contact-value {
+      font-size: 0.95rem; font-weight: 300; color: var(--text);
+    }
+    .contact-form { background: var(--surface); border-radius: 4px; padding: 2.5rem; box-shadow: var(--shadow-sm); }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400; color: var(--text); margin-bottom: 1.8rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block; font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text3); margin-bottom: 0.5rem;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 2px;
+      padding: 0.75rem 1rem;
+      font-family: 'Jost', sans-serif; font-size: 0.9rem; font-weight: 300;
+      color: var(--text);
+      transition: border-color 0.25s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--orange);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%; background: var(--orange); color: #fff;
+      border: none; border-radius: 2px;
+      padding: 1rem; cursor: pointer;
+      font-family: 'Jost', sans-serif; font-size: 0.8rem;
+      font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: background 0.25s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--orange-dark); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 3rem 8vw;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 500; color: var(--text);
+      letter-spacing: 0.06em;
+    }
+    .footer-logo span { color: var(--orange); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.72rem; font-weight: 300; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text3); text-decoration: none;
+      transition: color 0.25s;
+    }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-copy {
+      font-size: 0.72rem; font-weight: 300; color: var(--text3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── MOBILE NAV ── */
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 5vw;
+      flex-direction: column; gap: 1.2rem;
+      z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 0.85rem; font-weight: 300; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text2); text-decoration: none;
+      transition: color 0.25s; padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:hover { color: var(--orange); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .collections-grid { grid-template-columns: repeat(2, 1fr); }
+      .collection-card:first-child { grid-row: span 1; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-step::before { display: none; }
+    }
+    @media (max-width: 768px) {
+      #hero { grid-template-columns: 1fr; padding: 100px 6vw 60px; }
+      .hero-visual { display: none; }
+      .hero-stats { gap: 2rem; }
+      #about { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+      .collections-grid { grid-template-columns: 1fr; }
+      .collection-card:first-child { grid-row: span 1; }
+      .process-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      #contact { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Devika <span>✦</span> Jewellery</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()"></button>
+    <a href="#contact" class="nav-cta">Enquire</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#collections" onclick="toggleMenu()">Collections</a>
+  <a href="#process" onclick="toggleMenu()">Process</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Est. 2008 · Chennai, India</div>
+    <h1 class="hero-title">
+      Where <em>Gold</em><br>Meets<br>Artistry
+    </h1>
+    <p class="hero-sub">
+      Handcrafted jewellery designed to celebrate life's most precious moments. Each piece tells a story woven in gold, diamonds, and timeless craftsmanship.
+    </p>
+    <div class="hero-actions">
+      <a href="#collections" class="btn-primary">View Collections</a>
+      <a href="#contact" class="btn-outline">Book Consultation</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years of Craft</div>
+      </div>
+      <div>
+        <div class="stat-num">2K+</div>
+        <div class="stat-label">Pieces Created</div>
+      </div>
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-jewel-display">
+      <svg class="jewel-svg" viewBox="0 0 300 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Necklace illustration -->
+        <ellipse cx="150" cy="80" rx="90" ry="20" stroke="#C9992A" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+        <circle cx="150" cy="82" r="5" fill="#E8651A"/>
+        <!-- Chain links -->
+        <path d="M60 80 Q50 100 55 120 Q60 140 70 150" stroke="#C9992A" stroke-width="1.5" fill="none"/>
+        <path d="M240 80 Q250 100 245 120 Q240 140 230 150" stroke="#C9992A" stroke-width="1.5" fill="none"/>
+        <!-- Pendant outline -->
+        <path d="M70 150 Q110 200 150 220 Q190 200 230 150" stroke="#C9992A" stroke-width="1.5" fill="none"/>
+        <!-- Main pendant -->
+        <path d="M150 215 L130 260 L150 285 L170 260 Z" fill="rgba(232,101,26,0.15)" stroke="#E8651A" stroke-width="1.5"/>
+        <circle cx="150" cy="248" r="18" fill="rgba(201,153,42,0.2)" stroke="#C9992A" stroke-width="1.5"/>
+        <circle cx="150" cy="248" r="10" fill="rgba(232,101,26,0.3)" stroke="#E8651A" stroke-width="1"/>
+        <circle cx="150" cy="248" r="4" fill="#E8651A"/>
+        <!-- Decorative gems -->
+        <circle cx="110" cy="180" r="5" fill="rgba(232,101,26,0.4)" stroke="#E8651A" stroke-width="1"/>
+        <circle cx="190" cy="180" r="5" fill="rgba(232,101,26,0.4)" stroke="#E8651A" stroke-width="1"/>
+        <circle cx="130" cy="200" r="4" fill="rgba(201,153,42,0.5)" stroke="#C9992A" stroke-width="1"/>
+        <circle cx="170" cy="200" r="4" fill="rgba(201,153,42,0.5)" stroke="#C9992A" stroke-width="1"/>
+        <circle cx="150" cy="215" r="5" fill="rgba(232,101,26,0.5)" stroke="#E8651A" stroke-width="1"/>
+        <!-- Sparkles -->
+        <g fill="#C9992A" opacity="0.7">
+          <path d="M90 50 L91.5 56 L90 62 L88.5 56 Z"/>
+          <path d="M84 56 L90 57.5 L96 56 L90 54.5 Z"/>
+          <path d="M200 40 L201 44 L200 48 L199 44 Z"/>
+          <path d="M196 44 L200 45 L204 44 L200 43 Z"/>
+          <path d="M60 140 L61 143 L60 146 L59 143 Z"/>
+          <path d="M57 143 L60 144 L63 143 L60 142 Z"/>
+          <path d="M240 130 L241 134 L240 138 L239 134 Z"/>
+          <path d="M237 134 L240 135 L243 134 L240 133 Z"/>
+        </g>
+        <!-- Label -->
+        <text x="150" y="340" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" fill="#C9992A" letter-spacing="4">DEVIKA</text>
+        <text x="150" y="356" text-anchor="middle" font-family="Jost, sans-serif" font-size="7" fill="#9A8878" letter-spacing="6">JEWELLERY</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Handcrafted Jewellery</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Custom Designs</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Gold & Diamond</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Bridal Collections</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Temple Jewellery</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Anniversary Gifts</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Antique Designs</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Handcrafted Jewellery</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Custom Designs</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Gold & Diamond</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Bridal Collections</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Temple Jewellery</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Anniversary Gifts</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Antique Designs</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-img-frame">
+      <svg viewBox="0 0 300 380" width="70%" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="30" width="220" height="320" rx="3" fill="rgba(232,101,26,0.04)" stroke="rgba(201,153,42,0.3)" stroke-width="1"/>
+        <!-- Earring pair -->
+        <circle cx="105" cy="130" r="30" fill="rgba(232,101,26,0.1)" stroke="#E8651A" stroke-width="1.5"/>
+        <circle cx="105" cy="130" r="18" fill="rgba(201,153,42,0.15)" stroke="#C9992A" stroke-width="1"/>
+        <circle cx="105" cy="130" r="8" fill="rgba(232,101,26,0.4)" stroke="#E8651A" stroke-width="1"/>
+        <path d="M105 160 L100 185 L105 200 L110 185 Z" fill="rgba(232,101,26,0.2)" stroke="#E8651A" stroke-width="1.2"/>
+        <circle cx="195" cy="130" r="30" fill="rgba(232,101,26,0.1)" stroke="#E8651A" stroke-width="1.5"/>
+        <circle cx="195" cy="130" r="18" fill="rgba(201,153,42,0.15)" stroke="#C9992A" stroke-width="1"/>
+        <circle cx="195" cy="130" r="8" fill="rgba(232,101,26,0.4)" stroke="#E8651A" stroke-width="1"/>
+        <path d="M195 160 L190 185 L195 200 L200 185 Z" fill="rgba(232,101,26,0.2)" stroke="#E8651A" stroke-width="1.2"/>
+        <!-- Bangles -->
+        <ellipse cx="150" cy="290" rx="60" ry="22" stroke="#C9992A" stroke-width="2" fill="none"/>
+        <ellipse cx="150" cy="290" rx="50" ry="18" stroke="#E8651A" stroke-width="1" fill="none" stroke-dasharray="3,3"/>
+        <ellipse cx="150" cy="290" rx="70" ry="26" stroke="rgba(201,153,42,0.4)" stroke-width="1" fill="none"/>
+        <text x="150" y="60" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="10" fill="#C9992A" letter-spacing="3">COLLECTION</text>
+        <text x="150" y="75" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="8" fill="#9A8878" letter-spacing="2">2024</text>
+      </svg>
+    </div>
+    <div class="about-badge">
+      <span class="about-badge-num">15+</span>
+      <span class="about-badge-txt">Years</span>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="section-tag reveal">Our Story</div>
+    <h2 class="section-title reveal reveal-delay-1">Crafting <em>Dreams</em><br>Into Gold</h2>
+    <p class="about-text reveal reveal-delay-2">
+      At <strong>Devika Jewellery Designers</strong>, we believe that every piece of jewellery carries a story. Founded with a passion for traditional artistry blended with contemporary design, we have spent over 15 years creating heirloom-quality jewellery that celebrates India's rich heritage. From intricate temple designs to sleek modern silhouettes, each piece is <strong>crafted by hand</strong> with meticulous attention to detail.
+    </p>
+    <div class="about-features reveal reveal-delay-3">
+      <div class="about-feature">
+        <div class="about-feature-icon">💎</div>
+        <div class="about-feature-title">Certified Gems</div>
+        <div class="about-feature-text">Only ethically sourced, certified diamonds and gemstones</div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🔨</div>
+        <div class="about-feature-title">Handcrafted</div>
+        <div class="about-feature-text">Each piece shaped by master artisans with decades of skill</div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">✏️</div>
+        <div class="about-feature-title">Custom Orders</div>
+        <div class="about-feature-text">Bring your vision — we design it from scratch, just for you</div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🛡️</div>
+        <div class="about-feature-title">BIS Hallmarked</div>
+        <div class="about-feature-text">All gold jewellery is BIS hallmarked for guaranteed purity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section id="collections">
+  <div class="collections-header">
+    <div>
+      <div class="section-tag reveal">Our Work</div>
+      <h2 class="section-title reveal reveal-delay-1">Signature <em>Collections</em></h2>
+    </div>
+    <a href="#contact" class="btn-outline reveal reveal-delay-2">View All →</a>
+  </div>
+  <div class="collections-grid reveal">
+    <div class="collection-card">
+      <div class="collection-img">
+        <svg viewBox="0 0 280 520" width="85%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M140 40 L100 80 L80 140 L100 200 L140 230 L180 200 L200 140 L180 80 Z" fill="rgba(232,101,26,0.12)" stroke="#E8651A" stroke-width="1.5"/>
+          <path d="M140 60 L110 90 L95 140 L110 185 L140 210 L170 185 L185 140 L170 90 Z" fill="rgba(201,153,42,0.1)" stroke="#C9992A" stroke-width="1"/>
+          <circle cx="140" cy="140" r="35" fill="rgba(232,101,26,0.15)" stroke="#E8651A" stroke-width="1.5"/>
+          <circle cx="140" cy="140" r="20" fill="rgba(201,153,42,0.2)" stroke="#C9992A" stroke-width="1"/>
+          <circle cx="140" cy="140" r="9" fill="#E8651A"/>
+          <path d="M140 230 L120 290 L140 330 L160 290 Z" fill="rgba(232,101,26,0.2)" stroke="#E8651A" stroke-width="1.5"/>
+          <circle cx="140" cy="308" r="20" fill="rgba(201,153,42,0.2)" stroke="#C9992A" stroke-width="1.5"/>
+          <circle cx="140" cy="308" r="10" fill="rgba(232,101,26,0.5)" stroke="#E8651A" stroke-width="1"/>
+          <text x="140" y="400" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" fill="#C9992A" letter-spacing="3">BRIDAL</text>
+          <text x="140" y="420" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="10" fill="#9A8878" letter-spacing="2">NECKLACE</text>
+        </svg>
+      </div>
+      <div class="collection-info">
+        <div class="collection-name">Bridal Splendour</div>
+        <div class="collection-sub">Gold · Diamond · Kundan</div>
+        <span class="collection-tag-pill">Most Popular</span>
+      </div>
+    </div>
+    <div class="collection-card">
+      <div class="collection-img">
+        <svg viewBox="0 0 240 240" width="75%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="120" cy="120" r="70" stroke="#C9992A" stroke-width="2" fill="rgba(232,101,26,0.05)"/>
+          <circle cx="120" cy="120" r="50" stroke="#E8651A" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
+          <circle cx="120" cy="120" r="32" fill="rgba(201,153,42,0.15)" stroke="#C9992A" stroke-width="1.5"/>
+          <circle cx="120" cy="120" r="16" fill="rgba(232,101,26,0.3)" stroke="#E8651A" stroke-width="1.5"/>
+          <circle cx="120" cy="120" r="6" fill="#E8651A"/>
+          <!-- Rays -->
+          <line x1="120" y1="50" x2="120" y2="38" stroke="#C9992A" stroke-width="1.5"/>
+          <line x1="120" y1="190" x2="120" y2="202" stroke="#C9992A" stroke-width="1.5"/>
+          <line x1="50" y1="120" x2="38" y2="120" stroke="#C9992A" stroke-width="1.5"/>
+          <line x1="190" y1="120" x2="202" y2="120" stroke="#C9992A" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="collection-info">
+        <div class="collection-name">Temple Classics</div>
+        <div class="collection-sub">Gold · Ruby · Emerald</div>
+        <span class="collection-tag-pill">Heritage</span>
+      </div>
+    </div>
+    <div class="collection-card">
+      <div class="collection-img">
+        <svg viewBox="0 0 240 240" width="75%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ring design -->
+          <ellipse cx="120" cy="130" rx="55" ry="20" stroke="#C9992A" stroke-width="2" fill="none"/>
+          <ellipse cx="120" cy="110" rx="55" ry="20" stroke="#C9992A" stroke-width="2" fill="rgba(232,101,26,0.05)"/>
+          <line x1="65" y1="110" x2="65" y2="130" stroke="#C9992A" stroke-width="2"/>
+          <line x1="175" y1="110" x2="175" y2="130" stroke="#C9992A" stroke-width="2"/>
+          <ellipse cx="120" cy="110" rx="35" ry="12" stroke="#E8651A" stroke-width="1" fill="rgba(201,153,42,0.1)" stroke-dasharray="3,2"/>
+          <ellipse cx="120" cy="95" rx="22" ry="18" fill="rgba(232,101,26,0.2)" stroke="#E8651A" stroke-width="1.5"/>
+          <ellipse cx="120" cy="95" rx="14" ry="11" fill="rgba(201,153,42,0.3)" stroke="#C9992A" stroke-width="1"/>
+          <ellipse cx="120" cy="95" rx="6" ry="5" fill="#E8651A"/>
+        </svg>
+      </div>
+      <div class="collection-info">
+        <div class="collection-name">Engagement Rings</div>
+        <div class="collection-sub">Diamond · Platinum · Gold</div>
+        <span class="collection-tag-pill">New</span>
+      </div>
+    </div>
+    <div class="collection-card">
+      <div class="collection-img">
+        <svg viewBox="0 0 240 240" width="75%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Earring design -->
+          <circle cx="90" cy="90" r="32" fill="rgba(232,101,26,0.1)" stroke="#E8651A" stroke-width="1.5"/>
+          <circle cx="90" cy="90" r="18" fill="rgba(201,153,42,0.2)" stroke="#C9992A" stroke-width="1"/>
+          <circle cx="90" cy="90" r="8" fill="#E8651A"/>
+          <path d="M90 122 L84 155 L90 170 L96 155 Z" fill="rgba(232,101,26,0.2)" stroke="#E8651A" stroke-width="1.2"/>
+          <circle cx="150" cy="90" r="32" fill="rgba(232,101,26,0.1)" stroke="#E8651A" stroke-width="1.5"/>
+          <circle cx="150" cy="90" r="18" fill="rgba(201,153,42,0.2)" stroke="#C9992A" stroke-width="1"/>
+          <circle cx="150" cy="90" r="8" fill="#E8651A"/>
+          <path d="M150 122 L144 155 L150 170 L156 155 Z" fill="rgba(232,101,26,0.2)" stroke="#E8651A" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="collection-info">
+        <div class="collection-name">Chandelier Earrings</div>
+        <div class="collection-sub">Gold · Pearl · Kundan</div>
+        <span class="collection-tag-pill">Festive</span>
+      </div>
+    </div>
+    <div class="collection-card">
+      <div class="collection-img">
+        <svg viewBox="0 0 240 240" width="75%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bangle stack -->
+          <ellipse cx="120" cy="115" rx="65" ry="24" stroke="#C9992A" stroke-width="2.5" fill="none"/>
+          <ellipse cx="120" cy="128" rx="65" ry="24" stroke="#E8651A" stroke-width="2" fill="none"/>
+          <ellipse cx="120" cy="141" rx="65" ry="24" stroke="rgba(201,153,42,0.5)" stroke-width="1.5" fill="none"/>
+          <ellipse cx="120" cy="115" rx="50" ry="18" stroke="rgba(232,101,26,0.3)" stroke-width="1" fill="none" stroke-dasharray="3,4"/>
+          <!-- Gems on bangle -->
+          <circle cx="75" cy="110" r="5" fill="rgba(232,101,26,0.6)" stroke="#E8651A" stroke-width="1"/>
+          <circle cx="120" cy="92" r="5" fill="rgba(201,153,42,0.7)" stroke="#C9992A" stroke-width="1"/>
+          <circle cx="165" cy="110" r="5" fill="rgba(232,101,26,0.6)" stroke="#E8651A" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="collection-info">
+        <div class="collection-name">Bangle Sets</div>
+        <div class="collection-sub">Gold · Enamel · Stone</div>
+        <span class="collection-tag-pill">Daily Wear</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div style="text-align:center; max-width:520px; margin: 0 auto 1rem;">
+    <div class="section-tag reveal" style="justify-content:center">How We Work</div>
+    <h2 class="section-title reveal reveal-delay-1" style="text-align:center">From <em>Vision</em> to Jewel</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal reveal-delay-1">
+      <div class="process-num">01</div>
+      <div class="process-title">Consultation</div>
+      <p class="process-text">We begin with a personal consultation to understand your vision, occasion, and budget. Every dream starts with a conversation.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="process-num">02</div>
+      <div class="process-title">Design Draft</div>
+      <p class="process-text">Our designers sketch 2–3 concepts for you to choose from. We refine until the design captures exactly what you imagined.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="process-num">03</div>
+      <div class="process-title">Crafting</div>
+      <p class="process-text">Master artisans bring the design to life — casting, setting stones, and hand-finishing each element with precision care.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-4">
+      <div class="process-num">04</div>
+      <div class="process-title">Delivery</div>
+      <p class="process-text">Your piece is hallmarked, quality-checked, and presented in our signature packaging — ready to be treasured forever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-tag reveal">Client Stories</div>
+  <h2 class="section-title reveal reveal-delay-1">Worn with <em>Love</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"The bridal set Devika created for my wedding was beyond anything I had imagined. Every single guest stopped to admire the craftsmanship."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">P</div>
+        <div>
+          <div class="testimonial-name">Priya Anand</div>
+          <div class="testimonial-loc">Chennai · Bridal Set</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"I gifted my mother a custom temple necklace and she cried with joy. The attention to traditional detail is absolutely unmatched anywhere in the city."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">R</div>
+        <div>
+          <div class="testimonial-name">Ramesh Iyer</div>
+          <div class="testimonial-loc">Coimbatore · Temple Jewellery</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-3">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"My engagement ring is simply perfect. They took my rough idea sketch and turned it into the most beautiful diamond ring. I receive compliments daily!"</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">M</div>
+        <div>
+          <div class="testimonial-name">Meera Subramaniam</div>
+          <div class="testimonial-loc">Bangalore · Diamond Ring</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info">
+    <div class="section-tag reveal">Get In Touch</div>
+    <h2 class="section-title reveal reveal-delay-1">Begin Your <em>Journey</em></h2>
+    <p style="font-size:0.95rem; font-weight:300; color:var(--text2); line-height:1.8; margin: 1.5rem 0 2.5rem;" class="reveal reveal-delay-2">
+      Whether you're planning a bridal trousseau, a cherished gift, or a piece that's entirely your own — we'd love to bring it to life for you.
+    </p>
+    <div class="contact-detail reveal reveal-delay-2">
+      <div class="contact-icon">📍</div>
+      <div>
+        <div class="contact-label">Studio Address</div>
+        <div class="contact-value">Ground floor, Gupta Pandari Complex, <br>H.No 7-5-62, Kumar Gali, <br>Nizamabad, Telangana 503001</div>
+      </div>
+    </div>
+    <div class="contact-detail reveal reveal-delay-3">
+      <div class="contact-icon">📞</div>
+      <div>
+        <div class="contact-label">Phone / WhatsApp</div>
+        <div class="contact-value">+91 98667 77775</div>
+      </div>
+    </div>
+    <div class="contact-detail reveal reveal-delay-3">
+      <div class="contact-icon">🕐</div>
+      <div>
+        <div class="contact-label">Studio Hours</div>
+        <div class="contact-value">Mon – Sun: 11:00 AM – 8:00 PM</div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form reveal reveal-delay-2">
+    <div class="form-title">Send an Enquiry</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="Priya" />
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Sharma" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" placeholder="your@email.com" />
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="tel" placeholder="+91 98000 00000" />
+    </div>
+    <div class="form-group">
+      <label>I'm Interested In</label>
+      <select>
+        <option value="">Select a category</option>
+        <option>Bridal Jewellery</option>
+        <option>Custom Design</option>
+        <option>Temple Jewellery</option>
+        <option>Diamond Jewellery</option>
+        <option>Engagement Rings</option>
+        <option>Gifting</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Your Message</label>
+      <textarea placeholder="Tell us about your dream piece…"></textarea>
+    </div>
+    <button class="form-submit" onclick="handleSubmit(event)">Send Enquiry ✦</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Devika <span>✦</span> Jewellery Designers</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#collections">Collections</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2024 Devika Jewellery Designers. All rights reserved.</div>
+</footer>
+
+<script>
+  // Theme toggle
+  function toggleTheme() {
+    const html = document.documentElement;
+    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', html.dataset.theme);
+  }
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.dataset.theme = saved;
+  })();
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Navbar shadow on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.boxShadow = window.scrollY > 30 ? '0 2px 24px rgba(80,40,10,0.10)' : 'none';
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = 'Sent! We\'ll be in touch ✦';
+    btn.style.background = 'var(--gold)';
+    setTimeout(() => {
+      btn.textContent = 'Send Enquiry ✦';
+      btn.style.background = '';
+    }, 3500);
+  }
+</script>
+</body>
+</html>
